@@ -11,9 +11,9 @@ exports.login = function(req, res){
 };
 
 exports.logout = function(req, res){
-  req.session.destroy(function(){
-    res.redirect('/');
-  });
+  req.logout();
+  req.flash('notice', 'T.T.F.N');
+  res.redirect('/');
 };
 
 exports.create = function(req, res){
@@ -26,7 +26,7 @@ exports.create = function(req, res){
   });
 };
 
-exports.authenticate = function(req, res){
+/*exports.authenticate = function(req, res){
   User.authenticate(req.body, function(user){
     if(user){
       req.session.regenerate(function(){
@@ -39,7 +39,7 @@ exports.authenticate = function(req, res){
       res.redirect('/login');
     }
   });
-};
+};*/
 
 exports.browse = function(req, res){
   User.find({isVisible:true}, function(err, users){
