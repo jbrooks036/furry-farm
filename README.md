@@ -44,7 +44,7 @@ $ npm test
 ### Contributors
 - [Logan Richardson](https://github.com/GLoganDR)
 - [Dave Boling] (https://github.com/kadowki)
-- [JoAnn Brookes] (https://github.com/jbrookes036)
+- [JoAnn Brookes] (https://github.com/jbrooks036)
 - [Jessica Raines] (https://github.com/jessicafraines)
 
 ### License
