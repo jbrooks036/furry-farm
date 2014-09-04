@@ -41,3 +41,10 @@ exports.authenticate = function(req, res){
   });
 };
 
+exports.browse = function(req, res){
+  User.find({isVisible:true}, function(err, users){
+    res.render('users/browse', {users:users});
+  });
+};
+
+
