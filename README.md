@@ -1,28 +1,30 @@
-## name of project
+## Furry Farm
 ### Code Badges
-build status icon
-coverage status icon
+[![Build Status](https://travis-ci.org/GLoganDR/furry-farm.svg)](https://travis-ci.org/GLoganDR/furry-farm)
+[![Coverage Status](https://coveralls.io/repos/GLoganDR/furry-farm/badge.png)](https://coveralls.io/r/GLoganDR/furry-farm)
 
 ### Screenshots
 ![Image1](https://raw.githubusercontent.com/nss-cohort-2014-06-07/express-template/master/docs/screenshots/one.jpg)
 ![Image2](https://raw.githubusercontent.com/nss-cohort-2014-06-07/express-template/master/docs/screenshots/two.jpg)
 
 ### Description
-write a description about your project
+This is our super original and awesome dating website for Furries! If you like dressing up as an animal and going out on a date, you'll love Furry Farm!
 
 ### Models
 ```
 Model 1
 ```
 
+
 ```
 Model 2
 ```
 
-### Database
+### Database: MongoDB: furry-farm
 ```
 Collecion 1
 ```
+
 
 ```
 Collection 2
@@ -40,7 +42,10 @@ $ npm test
 ```
 
 ### Contributors
-- [Chyld Medford](https://github.com/chyld)
+- [Logan Richardson](https://github.com/GLoganDR)
+- [Dave Boling] (https://github.com/kadowki)
+- [JoAnn Brookes] (https://github.com/jbrookes036)
+- [Jessica Raines] (https://github.com/jessicafraines)
 
 ### License
 [MIT](LICENSE)
