@@ -11,9 +11,9 @@ exports.login = function(req, res){
 };
 
 exports.logout = function(req, res){
-  req.session.destroy(function(){
-    res.redirect('/');
-  });
+  req.logout();
+  req.flash('notice', 'T.T.F.N');
+  res.redirect('/');
 };
 
 exports.create = function(req, res){
@@ -26,36 +26,20 @@ exports.create = function(req, res){
   });
 };
 
-exports.authenticate = function(req, res){
-  User.authenticate(req.body, function(user){
-    if(user){
-      req.session.regenerate(function(){
-        req.session.userId = user._id;
-        req.session.save(function(){
-          res.redirect('/');
-        });
-      });
-    }else{
-      res.redirect('/login');
-    }
-  });
-};
-
 exports.displayProfile = function(req, res){
-  console.log(req.params.userId);
   User.displayProfile(req.params.userId, function(err, user){
-    console.log(user);
-    if(user._id === res.locals.user._id){
+    //No user found, return error
+    if(!user) {
+      req.flash('error', 'No user found.');
+      res.redirect('/');
+    }
+    //Is it the owner?
+    else if(user._id.toString() === req.user._id.toString()){
       res.render('users/owner-page', {user: user});
     }
+    //Display public profile
     else {
-      if(!user) {
-        req.flash('error', 'No user found.');
-        res.redirect('/');
-      }
-      else {
-        res.render('user/public-page', {user: user});        
-      }
+      res.render('users/public-page', {user: user});        
     }
   });
 };
