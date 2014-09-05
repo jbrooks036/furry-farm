@@ -40,6 +40,8 @@ module.exports = function(app, express){
   app.get('/auth/google/callback', passport.authenticate('google',    {successRedirect:'/', failureRedirect:'/login', successFlash:'Google got you in!',  failureFlash:'Sorry, your Google login did not work'}));
   app.get('/auth/facebook', passport.authenticate('facebook'));
   app.get('/auth/facebook/callback', passport.authenticate('facebook',  {successRedirect:'/', failureRedirect:'/login', successFlash:'Facebook got you in!', failureFlash:'Sorry, your Facebook login did not work'}));
+  app.get('/messages', users.messages);
+  app.get('/messages/:msgId', users.message);
 
 
   //security

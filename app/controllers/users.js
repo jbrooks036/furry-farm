@@ -1,6 +1,9 @@
 'use strict';
 
-var User = require('../models/user');
+var User    = require('../models/user'),
+    moment  = require('moment'),
+    Message = require('../models/message');
+
 
 exports.new = function(req, res){
   res.render('users/new');
@@ -23,6 +26,19 @@ exports.create = function(req, res){
     }else{
       res.redirect('/register');
     }
+  });
+};
+
+exports.messages = function(req, res){
+  req.user.messages(function(err, messages){
+    console.log('>>>**<<<<', messages);
+    res.render('users/messages', {messages:messages, moment:moment});
+  });
+};
+
+exports.message = function(req, res){
+  Message.read(req.params.msgId, function(err, message){
+    res.render('users/message', {message:message, moment:moment});
   });
 };
 
