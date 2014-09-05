@@ -39,5 +39,35 @@ describe('users', function(){
       });
     });
   });
+
+  describe('get /farm/user/:id', function(){
+    it('should show a owner profile', function(done){
+      request(app)
+      .get('/farm/user/000000000000000000000001')
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        done();
+      });
+    });
+
+    it('should show a public user\'s profile', function(done){
+      request(app)
+      .get('/farm/user/000000000000000000000002')
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        done();
+      });
+    });
+
+    it('should not show a private user\'s profile', function(done){
+      request(app)
+      .get('/farm/user/000000000000000000000002')
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        done();
+      });
+    });
+  });
+
 });
 

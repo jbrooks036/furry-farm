@@ -28,5 +28,16 @@ describe('User', function(){
       expect(u).to.be.instanceof(User);
     });
   });
+
+  describe('.displayProfile', function(){
+    it('should display a public-only profile', function(done){
+      var c = '000000000000000000000003';
+      User.displayProfile(c, function(err, user){
+        expect(user.isPublic).to.be.true;
+        expect(user).to.be.ok;
+        done();
+      });
+    });
+  });
 });
 

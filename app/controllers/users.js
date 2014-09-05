@@ -41,3 +41,24 @@ exports.authenticate = function(req, res){
   });
 };
 
+exports.displayProfile = function(req, res){
+  console.log(req.params.userId);
+  User.displayProfile(req.params.userId, function(err, user){
+    console.log(user);
+    if(user._id === res.locals.user._id){
+      res.render('users/owner-page', {user: user});
+    }
+    else {
+      if(!user) {
+        req.flash('error', 'No user found.');
+        res.redirect('/');
+      }
+      else {
+        res.render('user/public-page', {user: user});        
+      }
+    }
+  });
+};
+
+
+
