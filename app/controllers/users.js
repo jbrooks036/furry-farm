@@ -39,7 +39,7 @@ exports.displayProfile = function(req, res){
     }
     //Display public profile
     else {
-      res.render('users/public-page', {user: user});        
+      res.render('users/public-page', {user: user});
     }
   });
 };
