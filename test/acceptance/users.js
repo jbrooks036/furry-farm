@@ -39,5 +39,19 @@ describe('users', function(){
       });
     });
   });
+
+  describe('get /users/:id/edit', function(){
+    it('should show the user profile edit page', function(done){
+      request(app)
+      .get('/users/000000000000000000000001/edit')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('Edit Profile');
+        done();
+      });
+    });
+  });
+
 });
 

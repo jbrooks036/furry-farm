@@ -47,6 +47,16 @@ exports.edit = function(req, res){
 };
 
 /*
+exports.edit = function(req, res){
+  User.findById(req.params.id, function(err, client){
+    if(res.locals.user._id.toString() === client._id.toString()){
+      res.render('users/edit', {client:client});
+    }else{
+      res.redirect('/users/'+client._id);
+    }
+  });
+};
+
 exports.update = function(req, res){
   res.locals.user.save(req.body, function(){
     res.redirect('/profile');
