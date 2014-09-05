@@ -1,6 +1,9 @@
 'use strict';
 
-var User = require('../models/user');
+var User    = require('../models/user'),
+    moment  = require('moment'),
+    Message = require('../models/message');
+
 
 exports.new = function(req, res){
   res.render('users/new');
@@ -26,6 +29,19 @@ exports.create = function(req, res){
   });
 };
 
+exports.messages = function(req, res){
+  req.user.messages(function(err, messages){
+    console.log('>>>**<<<<', messages);
+    res.render('users/messages', {messages:messages, moment:moment});
+  });
+};
+
+exports.message = function(req, res){
+  Message.read(req.params.msgId, function(err, message){
+    res.render('users/message', {message:message, moment:moment});
+  });
+};
+
 exports.displayProfile = function(req, res){
   User.displayProfile(req.params.userId, function(err, user){
     //No user found, return error
@@ -39,7 +55,7 @@ exports.displayProfile = function(req, res){
     }
     //Display public profile
     else {
-      res.render('users/public-page', {user: user});        
+      res.render('users/public-page', {user: user});
     }
   });
 };
