@@ -7,7 +7,7 @@ var expect    = require('chai').expect,
     User      = require('../../app/models/user'),
     dbConnect = require('../../app/lib/mongodb'),
     cp        = require('child_process'),
-    db        = 'template-test';
+    db        = 'furry-farm-test';
 
 describe('User', function(){
   before(function(done){
@@ -26,6 +26,17 @@ describe('User', function(){
     it('should create a new User object', function(){
       var u = new User();
       expect(u).to.be.instanceof(User);
+    });
+  });
+
+  describe('.displayProfile', function(){
+    it('should display a public-only profile', function(done){
+      var c = '000000000000000000000003';
+      User.displayProfile(c, function(err, user){
+        expect(user.isVisible).to.be.true;
+        expect(user).to.be.ok;
+        done();
+      });
     });
   });
 });

@@ -1,7 +1,8 @@
 'use strict';
 
 var bcrypt = require('bcrypt'),
-    Mongo  = require('mongodb');
+    Mongo  = require('mongodb'),
+    _      = require('underscore-contrib');
 
 function User(){
 }
@@ -12,7 +13,11 @@ Object.defineProperty(User, 'collection', {
 
 User.findById = function(id, cb){
   var _id = Mongo.ObjectID(id);
-  User.collection.findOne({_id:_id}, cb);
+  User.collection.findOne({_id:_id}, function(err, obj){
+    var user = Object.create(User.prototype);
+    user = _.extend(user, obj);
+    cb(err, user);
+  });
 };
 
 User.register = function(o, cb){
@@ -72,6 +77,11 @@ User.prototype.save = function(o, cb){
   });
 
   User.collection.save(this, cb);
+};
+
+User.displayProfile = function(userId, cb){
+  var _id = Mongo.ObjectID(userId);
+  User.collection.findOne({_id: _id, isVisible: true}, cb);
 };
 
 

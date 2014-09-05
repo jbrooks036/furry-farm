@@ -36,9 +36,27 @@ exports.update = function(req, res){
   console.log('>>>>>> CONTROLLER - USER UPDATE - req.body: ', req.body);
   console.log('>>>>>> CONTROLLER - USER UPDATE - req.user: ', req.user);
   res.locals.user.save(req.body, function(){
-    // res.redirect('/farm/users/:userId', {user:req.user._id});
-    res.redirect('/users/profile', {user:req.user._id});
+    res.redirect('/farm/users/:userId', {user:req.user._id});
   });
 };
+
+exports.displayProfile = function(req, res){
+  User.displayProfile(req.params.userId, function(err, user){
+    //No user found, return error
+    if(!user) {
+      req.flash('error', 'No user found.');
+      res.redirect('/');
+    }
+    //Is it the owner?
+    else if(user._id.toString() === req.user._id.toString()){
+      res.render('users/owner-page', {user: user});
+    }
+    //Display public profile
+    else {
+      res.render('users/public-page', {user: user});
+    }
+  });
+};
+
 
 
