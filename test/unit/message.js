@@ -22,12 +22,10 @@ describe('User', function(){
     });
   });
 
-  describe('.find', function(){
-    it('should find users who are public', function(done){
-      User.find({isVisible:true}, function(err, users){
-        expect(users).to.have.length(2);
-        done();
-      });
+  describe('constructor', function(){
+    it('should create a new User object', function(){
+      var u = new User();
+      expect(u).to.be.instanceof(User);
     });
   });
 
@@ -41,16 +39,5 @@ describe('User', function(){
       });
     });
   });
+});
 
-  describe('#messages', function(){
-    it('should display messages for a given user', function(done){
-      var u = new User();
-      u._id = '000000000000000000000001';
-      u.messages(function(err, messages){
-        expect(messages.length).to.equal(2);
-        done();
-      });
-    });
-  });
-
-});//final closing

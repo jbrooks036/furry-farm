@@ -17,7 +17,9 @@
               .form-group
                 input(type='hidden', name='_method', value='delete')
                 button.btn.btn-danger= user.email
-          li
+          li: a(href='/messages')
+            span Messages &nbsp;
+            span.badge= user.unread
         else
           li: a(href='/register') Register
           li: a(href='/login') Login

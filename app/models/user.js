@@ -1,6 +1,7 @@
 'use strict';
 
 var bcrypt = require('bcrypt'),
+    Message = require('./message'),
     Mongo  = require('mongodb'),
     _      = require('underscore-contrib');
 
@@ -64,6 +65,10 @@ User.facebookAuthenticate = function(token, secret, facebook, cb){
     user = {facebookId:facebook.id, username:facebook.username, type:'facebook'};
     User.collection.save(user, cb);
   });
+};
+
+User.prototype.messages = function(cb){
+  Message.messages(this._id, cb);
 };
 
 User.displayProfile = function(userId, cb){
