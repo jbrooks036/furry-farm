@@ -28,6 +28,7 @@ exports.create = function(req, res){
 
 exports.displayProfile = function(req, res){
   User.displayProfile(req.params.userId, function(err, user){
+    console.log(user);
     //No user found, return error
     if(!user) {
       req.flash('error', 'No user found.');
