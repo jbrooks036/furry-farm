@@ -1,7 +1,9 @@
 'use strict';
 
 var bcrypt = require('bcrypt'),
-    Mongo  = require('mongodb');
+    Message = require('./message'),
+    Mongo  = require('mongodb'),
+    _      = require('underscore-contrib');
 
 function User(){
 }
@@ -12,7 +14,11 @@ Object.defineProperty(User, 'collection', {
 
 User.findById = function(id, cb){
   var _id = Mongo.ObjectID(id);
-  User.collection.findOne({_id:_id}, cb);
+  User.collection.findOne({_id:_id}, function(err, obj){
+    var user = Object.create(User.prototype);
+    user = _.extend(user, obj);
+    cb(err, user);
+  });
 };
 
 User.register = function(o, cb){
@@ -55,6 +61,15 @@ User.facebookAuthenticate = function(token, secret, facebook, cb){
     user = {facebookId:facebook.id, username:facebook.username, type:'facebook'};
     User.collection.save(user, cb);
   });
+};
+
+User.prototype.messages = function(cb){
+  Message.messages(this._id, cb);
+};
+
+User.displayProfile = function(userId, cb){
+  var _id = Mongo.ObjectID(userId);
+  User.collection.findOne({_id: _id, isVisible: true}, cb);
 };
 
 

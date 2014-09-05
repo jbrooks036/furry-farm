@@ -10,7 +10,6 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
                        callbackURL:  config.google.callbackUrl
                      },
                      User.googleAuthenticate);
-console.log(config.google);
 
 module.exports = google;
 

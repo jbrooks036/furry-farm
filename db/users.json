@@ -1,0 +1,40 @@
+{
+  "_id" : {"$oid":"000000000000000000000001"},
+  "email" : "bob@aol.com",
+  "username" : "BobtheBird",
+  "species" : "Bird",
+  "height" : "tall",
+  "age" : 40,
+  "bodyType" : 3,
+  "password" : "$2a$10$XR.IQktUUujLBxed70GQn.jWY1wZ9ThM0Tar9wTqzkI4Uk1uP2Or2",
+  "isVisible" : true,
+  "loc" : {"name":"Reykjavíc, Iceland", "lat":64.133333, "lng":-21.933333},
+  "sex" : "male"
+}
+{
+  "_id" : {"$oid":"000000000000000000000002"},
+  "email" : "sam@aol.com",
+  "height" : "average",
+  "age" : 27,
+  "bodyType" : 2,
+  "username" : "SamtheSeal",
+  "species" : "Seal",
+  "password" : "$2a$10$XR.IQktUUujLBxed70GQn.jWY1wZ9ThM0Tar9wTqzkI4Uk1uP2Or2",
+  "isVisible" : false,
+  "loc" : {"name":"Manila, Phillippines", "lat":14.583333, "lng":120.966667},
+  "sex" : "male"
+}
+{
+  "_id" : {"$oid":"000000000000000000000003"},
+  "email" : "sue@aol.com",
+  "username" : "SuethePig",
+  "species" : "Pig",
+  "height" : "short",
+  "bodyType" : 1,
+  "age" : 38,
+  "password" : "$2a$10$XR.IQktUUujLBxed70GQn.jWY1wZ9ThM0Tar9wTqzkI4Uk1uP2Or2",
+  "isVisible" : true,
+  "loc" : {"name":"Amsterdam, Netherlands", "lat":52.366667, "lng":4.9},
+  "sex" : "female"
+}
+

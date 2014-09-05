@@ -19,7 +19,7 @@ describe('users', function(){
     cp.execFile(__dirname + '/../scripts/clean-db.sh', [process.env.DB], {cwd:__dirname + '/../scripts'}, function(err, stdout, stderr){
       request(app)
       .post('/login')
-      .send('email=a@aol.com')
+      .send('email=bob@aol.com')
       .send('password=1234')
       .end(function(err, res){
         cookie = res.headers['set-cookie'][0];
@@ -35,6 +35,38 @@ describe('users', function(){
       .end(function(err, res){
         expect(res.status).to.equal(200);
         expect(res.text).to.include('Register');
+        done();
+      });
+    });
+  });
+
+  describe('get /farm/user/:id', function(){
+    it('should show a owner profile', function(done){
+      request(app)
+      .get('/farm/users/000000000000000000000001')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        done();
+      });
+    });
+
+    it('should not show a private user\'s profile', function(done){
+      request(app)
+      .get('/farm/users/000000000000000000000002')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        done();
+      });
+    });
+
+    it('should show a public user\'s profile', function(done){
+      request(app)
+      .get('/farm/users/000000000000000000000003')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
         done();
       });
     });
@@ -110,6 +142,18 @@ describe('users', function(){
     it('should take the user to the messages page', function(done){
       request(app)
       .get('/messages')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        done();
+      });
+    });
+  });
+
+  describe('get /messages/:msgId', function(){
+    it('should take the user to the messages page', function(done){
+      request(app)
+      .get('/messages/a00000000000000000000001')
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(200);
