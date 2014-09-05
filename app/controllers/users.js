@@ -1,6 +1,9 @@
 'use strict';
 
-var User = require('../models/user');
+var User    = require('../models/user'),
+    moment  = require('moment'),
+    Message = require('../models/message');
+
 
 exports.new = function(req, res){
   res.render('users/new');
@@ -26,18 +29,15 @@ exports.create = function(req, res){
   });
 };
 
-/*exports.authenticate = function(req, res){
-  User.authenticate(req.body, function(user){
-    if(user){
-      req.session.regenerate(function(){
-        req.session.userId = user._id;
-        req.session.save(function(){
-          res.redirect('/');
-        });
-      });
-    }else{
-      res.redirect('/login');
-    }
+exports.messages = function(req, res){
+  res.locals.user.messages(function(err, messages){
+    console.log('>>>**<<<<', messages);
+    res.render('users/messages', {messages:messages, moment:moment});
   });
-};*/
+};
 
+exports.message = function(req, res){
+  Message.read(req.params.msgId, function(err, message){
+    res.render('users/message', {message:message, moment:moment});
+  });
+};
