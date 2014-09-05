@@ -11,4 +11,14 @@ script:
   - npm test
 after_script:
   - npm run coveralls
+env:
+  global:
+    - secure: 'Zqf8eussaodadiJQpLLvIyI4E15HFxgrj5Mh7kGxE946ltxUzFQ1TyvcwXs0LqNKq1oVps1upVoZ7r9oeuRAxge94yGWbtxr2FnfWw6eR9jnKGrNxlNsyN22BoEPBD9FQeIAsGJUuUPktARYD07i/8cK8fb+se0Ypsg8Qcjrp3s='
+    - secure: 'fj9PCwwFLDYPS3gRl2NUfCV1gVdGyvM8kKgN4+Jes7Alx57yUEotY5CtISF+T1ddoIuQ1zg4/M7Fw20vltgrUhPw9kGGwg+66gIyviOsO8O/KvDn6ZmUajB8LzcXIiqUahS9JBwpWUEMxjAQJ5tC370a5XqfdjgeOAoq5BsGSXE='
+    - secure: 'P+jeblKE2vhwhKpYu89XY9ZsS2zVMyCgO4+V9jIab7Ourh9x02AKiHzuGmoUQQjZirCGNjU5lhns50iUVQPfp9QR4U2tTQBWtD+fiN9GKxS6YBYY5nALDv/Yw5wZ6FOVep3JQe1HIKf92Q0ULp2I6BPO6Dv+Q3lLdeZGwl63Pgo='
+    - secure: 'XiuBtdUnIOEuO5urVgGZH2cFtPwbwc+ejCChUHkfHgCtrOgaB90r04qztk9c34IeujIY0Pk05PX8vw4ux8Mv7F+0RJ/RztdDkKaQKfDWjdCnz2q4AETSM8AGrYa85+rqpy0e47ihtEA3aAvIC2tkslEBi2G7uR6AvYFip578OAs='
+    - secure: 'eaUAOpGhuADANzqL06KYMC1WKCaMOgiNceSQnt9B5+1y/HeaUe2nJEZ7vw+bcu0o5EDt2OX2mJ4fqwIYUpNj7dwUKSvtQA8B3589L4uYBuAlMrvg3GPR6l6gCJyMPiVuJCaag6WP4PmF22vlzTfKdm/8EJovtvoEp/Cs1sI3HJ0='
+    - secure: 'Icwr6tptBooMBsV+o4uoG9hCPmeBG1cksF7yjMdMjLCAVt9y4/UhuO0h5CY7iUouyiaEupQY13Wb9CcBXkXe+IJpUYFY5/OTCiC9VGgT0DYYbSmvCtm12YUChCb9TJyWPwqGgw/m6a56BldeOMUqpb8sN9iWNkTPeAAMaw0kAks='
+    - secure: 'TUTilDOhOWqwTJVy0ckZaS0+PGcQVYLnO1MieSdrqPZjDbufj3w3FFAzC9n+oPX8XQcdMgLs57DqaJw+M471JV9887jeKwVg+tYQNlu4InUg8vF7e7e5wr+wJ8+6En7uFLmHzjraaoRXeQBpEaLL5LXZX913mLJE4bZ49FCEhwQ='
+
 

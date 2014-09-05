@@ -2,7 +2,7 @@
 
 'use strict';
 
-process.env.DB   = 'template-test';
+process.env.DB   = 'furry-farm-test';
 
 var expect  = require('chai').expect,
     cp      = require('child_process'),
@@ -48,10 +48,77 @@ describe('users', function(){
       .end(function(err, res){
         expect(res.status).to.equal(200);
         expect(res.text).to.include('Edit Profile');
+      });
+    });
+  });
+
+  describe('get /auth/twitter', function(){
+    it('should take user to the home page', function(done){
+      request(app)
+      .get('/auth/twitter')
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
         done();
       });
     });
   });
 
-});
+  describe('get /auth/twitter/callback', function(){
+    it('should take user to the home page', function(done){
+      request(app)
+      .get('/auth/twitter/callback')
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        done();
+      });
+    });
+  });
+
+  describe('get /auth/facebook', function(){
+    it('should take user to the home page', function(done){
+      request(app)
+      .get('/auth/facebook')
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        done();
+      });
+    });
+  });
+
+  describe('get /auth/facebook/callback', function(){
+    it('should take user to the home page', function(done){
+      request(app)
+      .get('/auth/facebook/callback')
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        done();
+      });
+    });
+  });
+
+  describe('get /auth/google', function(){
+    it('should take user to the home page', function(done){
+      request(app)
+      .get('/auth/google')
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        done();
+      });
+    });
+  });
+
+  describe('get /auth/google/callback', function(){
+    it('should take user to the home page', function(done){
+      request(app)
+      .get('/auth/google/callback')
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        done();
+      });
+    });
+  });
+
+
+});//closing bracket
+
 
