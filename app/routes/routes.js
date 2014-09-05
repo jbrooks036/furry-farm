@@ -23,9 +23,12 @@ module.exports = function(app, express){
   app.use(session({store:new RedisStore(), secret:'my super secret key', resave:true, saveUninitialized:true, cookie:{maxAge:null}}));
   app.use(flash());
   passportConfig(passport, app);
+
+  //authentication
   app.use(security.locals);
   app.use(debug.info);
 
+  //guest user access
   app.get('/', home.index);
   app.get('/register', users.new);
   app.post('/register', users.create);
@@ -39,10 +42,14 @@ module.exports = function(app, express){
   app.get('/auth/facebook/callback', passport.authenticate('facebook',  {successRedirect:'/', failureRedirect:'/login', successFlash:'Facebook got you in!', failureFlash:'Sorry, your Facebook login did not work'}));
 
 
+  //security
   app.use(security.bounce);
+
+  //logged in user access
   app.delete('/logout', users.logout);
   app.get('/browse', users.browse);
 
+  app.get('/farm/users/:userId', users.displayProfile);
 
   console.log('Express: Routes Loaded');
 };

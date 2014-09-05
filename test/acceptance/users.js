@@ -54,6 +54,38 @@ describe('users', function(){
     });
   });
 
+  describe('get /farm/user/:id', function(){
+    it('should show a owner profile', function(done){
+      request(app)
+      .get('/farm/users/000000000000000000000001')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        done();
+      });
+    });
+
+    it('should not show a private user\'s profile', function(done){
+      request(app)
+      .get('/farm/users/000000000000000000000002')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        done();
+      });
+    });
+
+    it('should show a public user\'s profile', function(done){
+      request(app)
+      .get('/farm/users/000000000000000000000003')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        done();
+      });
+    });
+  });
+
   describe('get /auth/twitter', function(){
     it('should take user to the home page', function(done){
       request(app)
