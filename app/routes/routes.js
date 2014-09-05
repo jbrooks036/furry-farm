@@ -41,6 +41,7 @@ module.exports = function(app, express){
   app.use(security.bounce);
   app.delete('/logout', users.logout);
   app.get('/users/edit', users.edit);
+  app.put('/farm/profile', users.show);
 
   console.log('Express: Routes Loaded');
 };

@@ -31,22 +31,14 @@ exports.edit = function(req, res){
   res.render('users/edit');
 };
 
-/*
-exports.edit = function(req, res){
-  User.findById(req.params.id, function(err, client){
-    if(res.locals.user._id.toString() === client._id.toString()){
-      res.render('users/edit', {client:client});
-    }else{
-      res.redirect('/users/'+client._id);
-    }
-  });
-};
-
 exports.update = function(req, res){
+  console.log('>>>>>> CONTROLLER - USER UPDATE - req.params: ', req.params);
+  console.log('>>>>>> CONTROLLER - USER UPDATE - req.body: ', req.body);
+  console.log('>>>>>> CONTROLLER - USER UPDATE - req.user: ', req.user);
   res.locals.user.save(req.body, function(){
-    res.redirect('/profile');
+    // res.redirect('/farm/users/:userId', {user:req.user._id});
+    res.redirect('/users/profile', {user:req.user._id});
   });
 };
-*/
 
 
