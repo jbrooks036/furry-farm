@@ -39,16 +39,5 @@ describe('User', function(){
       });
     });
   });
+});
 
-  describe('#messages', function(){
-    it('should display messages for a given user', function(done){
-      var u = new User();
-      u._id = '000000000000000000000001';
-      u.messages(function(err, messages){
-        expect(messages.length).to.equal(2);
-        done();
-      });
-    });
-  });
-
-});//final closing
