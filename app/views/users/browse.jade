@@ -1,6 +1,40 @@
-extend ../shared/template
+extends ../shared/template
 block content
-  h2 Explore the Farm!
-
+  h2 Peruse the Farm!
+  .row
+    .col-xs-3
+      #species
+    .col-xs-8
+      #map
+    .col-xs-1
+  .row
+    .col-xs-3
+      #attributes
+    .col-xs-8
+      table#sort.sort.table(style='background-color: white;', data-user-lat=user.loc.lat, data-user-lng=user.loc.lng, data-user-name=user.loc.name)
+        thead
+          tr
+            th.sort-header Username
+            th.sort-header Age
+            th.sort-header Sex
+            th.sort-header Species
+            th.sort-header Location
+            th.sort-header Height
+            th.sort-header Body Type
+        tbody
+          each user in users
+            tr(data-name=user.loc.name, data-lat=user.loc.lat, data-lng=user.loc.lng)
+              td: a(href='/users/#{user._id}')= user.username
+              td= user.age
+              td= user.sex
+              td= user.species
+              td= user.loc.name
+              td= user.height
+              td= user.bodyType
+    .col-xs-1
 
 block scripts
+  script(src='/js/user/main.js')
+  script(src='/js/vendor/tablesort.min.js')
+  script(src='/js/user/tablesort.js')
+

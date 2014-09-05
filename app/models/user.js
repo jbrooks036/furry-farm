@@ -6,23 +6,6 @@ var bcrypt = require('bcrypt'),
 function User(){
 }
 
-User.prototype.save = function(o, cb){
-  var properties = Object.keys(o),
-      self       = this;
-
-  properties.forEach(function(property){
-    switch(property){
-      case 'visible':
-        self.isVisible = o[property] === 'public';
-        break;
-      default:
-        self[property] = o[property];
-    }
-  });
-
-  User.collection.save(this, cb);
-};
-
 User.find = function(filter, cb){
   User.collection.find(filter).toArray(cb);
 };

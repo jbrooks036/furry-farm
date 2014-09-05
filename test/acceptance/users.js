@@ -43,12 +43,13 @@ describe('users', function(){
   describe('get /browse', function(){
     it('should show all public users', function(done){
       request(app)
-      .get('/users')
+      .get('/browse')
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(200);
         expect(res.text).to.include('bob@aol.com');
         expect(res.text).to.not.include('sue@aol.com');
+        done();
       });
     });
   });
