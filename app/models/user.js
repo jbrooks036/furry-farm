@@ -10,6 +10,7 @@ function User(){
 }
 
 User.find = function(filter, cb){
+  filter.isVisible = true;
   User.collection.find(filter).toArray(cb);
 };
 
@@ -100,7 +101,6 @@ User.addLick = function(lickedPerson, loggedInUser, cb){
     User.collection.save(user, cb);
   });
 };
-
 
 module.exports = User;
 

@@ -70,9 +70,9 @@ exports.lick = function(req, res){
   });
 };
 
-
 exports.browse = function(req, res){
-  User.find({isVisible:true}, function(err, users){
+  var filter = req.query || {isVisible:true};
+  User.find(filter, function(err, users){
     res.render('users/browse', {users:users});
   });
 };
