@@ -36,7 +36,7 @@ exports.update = function(req, res){
   console.log('>>>>>> CONTROLLER - USER UPDATE - req.body: ', req.body);
   console.log('>>>>>> CONTROLLER - USER UPDATE - req.user: ', req.user);
   res.locals.user.save(req.body, function(){
-    res.redirect('/farm/users/:userId', {user:req.user._id});
+    res.redirect('/farm/users/' + res.locals.user._id);
   });
 };
 

@@ -47,6 +47,7 @@ module.exports = function(app, express){
   //logged in user access
   app.delete('/logout', users.logout);
   app.get('/users/edit', users.edit);
+  app.put('/users/edit', users.update);
   app.get('/farm/users/:userId', users.displayProfile);
 
   console.log('Express: Routes Loaded');
