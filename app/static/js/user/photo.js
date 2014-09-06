@@ -6,7 +6,6 @@
 
     $('.minorPhoto').on({
       mouseenter: function(){
-        alert('SUCCESS');
         var $photo = $(this).css('background-image');
         $('#primaryPhoto').css('background-image', $photo);
       },
