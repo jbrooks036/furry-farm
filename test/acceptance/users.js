@@ -151,6 +151,53 @@ describe('users', function(){
     });
   });
 
+  describe('get /messages', function(){
+    it('should take the user to the messages page', function(done){
+      request(app)
+      .get('/messages')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        done();
+      });
+    });
+  });
+
+  describe('get /messages/:msgId', function(){
+    it('should take the user to the messages page', function(done){
+      request(app)
+      .get('/messages/a00000000000000000000001')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        done();
+      });
+    });
+  });
+
+  describe('post /user/:toId/wag', function(){
+    it('should should add a wag to someones profile', function(done){
+      request(app)
+      .post('/user/000000000000000000000003/wag')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        done();
+      });
+    });
+  });
+
+  describe('post /user/:lick/lick', function(){
+    it('should should add favorite to someones list', function(done){
+      request(app)
+      .post('/user/000000000000000000000003/lick')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        done();
+      });
+    });
+  });
 
 });//closing bracket
 
