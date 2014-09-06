@@ -84,4 +84,11 @@ exports.lick = function(req, res){
   });
 };
 
+exports.browse = function(req, res){
+  var filter = req.query || {isVisible:true};
+  User.find(filter, function(err, users){
+    res.render('users/browse', {users:users});
+  });
+};
+
 
