@@ -75,7 +75,7 @@ User.displayProfile = function(userId, cb){
     async.map(user.wags, userIterator, function(err, waggers){
       user.waggers = waggers;
       cb(err, user);
-    });  
+    });
   });
 };
 
