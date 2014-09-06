@@ -1,15 +1,40 @@
 extends ../shared/template
 block content
-  h2 Peruse the Farm!
+  h2.browse Peruse the Farm!
   .row
-    .col-xs-3
-      #species
-    .col-xs-8
+    .col-xs-1
+    .col-xs-10
       #map
     .col-xs-1
   .row
-    .col-xs-3
+    .col-xs-1
+    .col-xs-2
       #attributes
+        h3.attributes Filter Users By:
+        ul.attributes
+          li Age
+          li Sex
+          li Location
+          li Height
+          li Body Type
+      #species
+        h3.species Select Species:
+        ul.species
+          li Dog
+          li Cat
+          li Mouse
+          li Pony
+          li Brony
+          li Lizard
+          li Fox
+          li Dinosaur
+          li Wolf
+          li Seal
+          li Bird
+          li Fish
+          li Penguin
+          li Raccoon
+          li GROOT
     .col-xs-8
       table#sort.sort.table(style='background-color: white;', data-user-lat=user.loc.lat, data-user-lng=user.loc.lng, data-user-name=user.loc.name)
         thead
