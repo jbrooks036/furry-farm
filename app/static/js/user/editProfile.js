@@ -11,7 +11,6 @@
   });
 
   function editLocation(e){
-    debugger;
     var lat = $('#lat').val();
 
     console.log('>>>>>>> editLocation.js');
@@ -34,7 +33,7 @@
       $('#lat').val(lat);
       $('#lng').val(lng);
 
-      $('editProfileForm').submit();
+      $('#editProfileForm').submit();
     });
   }
 })();
