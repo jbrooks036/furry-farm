@@ -9,6 +9,11 @@ var bcrypt  = require('bcrypt'),
 function User(){
 }
 
+User.find = function(filter, cb){
+  filter.isVisible = true;
+  User.collection.find(filter).toArray(cb);
+};
+
 Object.defineProperty(User, 'collection', {
   get: function(){return global.mongodb.collection('users');}
 });
@@ -96,7 +101,6 @@ User.addLick = function(lickedPerson, loggedInUser, cb){
     User.collection.save(user, cb);
   });
 };
-
 
 module.exports = User;
 
