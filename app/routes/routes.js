@@ -10,7 +10,7 @@ var morgan         = require('morgan'),
     passport       = require('passport'),
     passportConfig = require('../lib/passport/passportConfig'),
     security       = require('../lib/security'),
-    debug          = require('../lib/debug'),
+    //debug          = require('../lib/debug'),
     home           = require('../controllers/home'),
     users          = require('../controllers/users');
 
@@ -26,7 +26,7 @@ module.exports = function(app, express){
 
   //authentication
   app.use(security.locals);
-  app.use(debug.info);
+  //app.use(debug.info);
 
   //guest user access
   app.get('/', home.index);
