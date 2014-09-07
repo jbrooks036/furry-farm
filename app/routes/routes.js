@@ -39,7 +39,7 @@ module.exports = function(app, express){
   app.get('/auth/google', passport.authenticate('google',             {scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.profile.emails.read']}));
   app.get('/auth/google/callback', passport.authenticate('google',    {successRedirect:'/', failureRedirect:'/login', successFlash:'Google got you in!',  failureFlash:'Sorry, your Google login did not work'}));
   app.get('/auth/facebook', passport.authenticate('facebook'));
-  app.get('/auth/facebook/callback', passport.authenticate('facebook',  {successRedirect:'/', failureRedirect:'/login', successFlash:'Facebook got you in!', failureFlash:'Sorry, your Facebook login did not work'}));
+  app.get('/auth/facebook/callback', passport.authenticate('facebook', {successRedirect:'/', failureRedirect:'/login', successFlash:'Facebook got you in!', failureFlash:'Sorry, your Facebook login did not work'}));
   app.get('/messages', users.messages);
   app.get('/messages/:msgId', users.message);
 
@@ -50,7 +50,8 @@ module.exports = function(app, express){
   app.delete('/logout', users.logout);
   app.get('/users/edit', users.edit);
   app.put('/users/edit', users.update);
-  app.get('/browse', users.browse);
+  app.post('/users/edit', users.uploadPhoto);
+ //  app.get('/browse', users.browse);
 
   app.get('/farm/users/:userId', users.displayProfile);
   app.post('/user/:toId/wag', users.wag);

@@ -4,15 +4,12 @@ var bcrypt  = require('bcrypt'),
     Message = require('./message'),
     Mongo   = require('mongodb'),
     _       = require('underscore-contrib'),
+    fs    = require('fs'),
+    path  = require('path'),
     async   = require('async');
 
 function User(){
 }
-
-User.find = function(filter, cb){
-  filter.isVisible = true;
-  User.collection.find(filter).toArray(cb);
-};
 
 Object.defineProperty(User, 'collection', {
   get: function(){return global.mongodb.collection('users');}
@@ -69,6 +66,25 @@ User.facebookAuthenticate = function(token, secret, facebook, cb){
   });
 };
 
+User.prototype.uploadPhoto = function(files, cb){
+  var dir   = __dirname + '/../static/img/' + this._id,
+      exist = fs.existsSync(dir),
+      self  = this;
+
+  if(!exist){fs.mkdirSync(dir);}
+
+  files.photos.forEach(function(photo){
+    var ext    = path.extname(photo.path),
+        rel    = '/img/' + self._id + '/' + self.photos.length + ext,
+        abs    = dir + '/' + self.photos.length + ext;
+    console.log(ext, rel);
+    fs.renameSync(photo.path, abs);
+    self.photos.push(rel);
+  });
+
+  User.collection.save(self, cb);
+};
+
 User.prototype.save = function(o, cb){
   var properties = Object.keys(o),
       self       = this;
@@ -118,6 +134,7 @@ User.addLick = function(lickedPerson, loggedInUser, cb){
     User.collection.save(user, cb);
   });
 };
+
 
 module.exports = User;
 

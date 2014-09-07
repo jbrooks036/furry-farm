@@ -2,6 +2,7 @@
 
 var User    = require('../models/user'),
     moment  = require('moment'),
+    mp      = require('multiparty'),
     Message = require('../models/message');
 
 
@@ -34,10 +35,20 @@ exports.edit = function(req, res){
   res.render('users/edit');
 };
 
+exports.uploadPhoto = function(req, res){
+  User.findById(req.user._id, function(err, user){
+    var form = new mp.Form();
+    form.parse(req, function(err, fields, files){
+console.log(err, fields, files);
+      User.uploadPhoto(files, function(){
+        console.log('>>>>>> CONTROLLER - USER UPLOADPHOTO - files: ', files);
+        res.redirect('/users/edit' + res.locals.user._id);
+      });
+    });
+  });
+};
+
 exports.update = function(req, res){
-  console.log('>>>>>> CONTROLLER - USER UPDATE - req.params: ', req.params);
-  console.log('>>>>>> CONTROLLER - USER UPDATE - req.body: ', req.body);
-  console.log('>>>>>> CONTROLLER - USER UPDATE - req.user: ', req.user);
   res.locals.user.save(req.body, function(){
     res.redirect('/farm/users/' + res.locals.user._id);
   });
@@ -84,11 +95,11 @@ exports.lick = function(req, res){
   });
 };
 
+/*
 exports.browse = function(req, res){
   var filter = req.query || {isVisible:true};
   User.find(filter, function(err, users){
     res.render('users/browse', {users:users});
   });
 };
-
-
+*/
