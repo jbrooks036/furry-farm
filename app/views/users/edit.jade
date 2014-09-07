@@ -11,11 +11,44 @@ block content
             input#lat(type='hidden', name='loc[lat]')
             input#lng(type='hidden', name='loc[lng]')
             .form-group
-              label(for='name') Name:
+              label(for='name') Display Name:
               input.form-control#name(type='text', name='name', value=(user.username || 'name?'), autofocus=true)
             .form-group
               label(for='species') Species:
-              input.form-control#species(type='text', name='species', value=(user.species || 'species?'))
+                select(name='species')
+                  option(value='Dog') Dog
+                  option(value='Cat') Cat
+                  option(value='Mouse') Mouse
+                  option(value='Horse') Horse
+                  option(value='Brony') Brony
+                  option(value='Lizard') Lizard
+                  option(value='Fox') Fox
+                  option(value='Dinosaur') Dinosaur
+                  option(value='Wolf') Wolf
+                  option(value='Seal') Seal
+                  option(value='Bird') Bird
+                  option(value='Fish') Fish
+                  option(value='Penguin') Penguin
+                  option(value='Racoon') Racoon
+                  option(value='GROOT') GROOT
+                  option(value='Other') Other
+            .form-group
+              label Sex:
+                select(name='sex')
+                  option(value='Male') Male
+                  option(value='Female') Female
+            .form-group
+              label Kids?:
+                select(name='kids')
+                  option(value='Yes') Yes
+                  option(value='No') No
+                  option(value='Maybe') Maybe
+                  option(value='I love kids!') I love kids!
+            .form-group
+              label Smoker?:
+                select(name='smoker')
+                  option(value='no') No
+                  option(value='yes') Yes
             .form-group
               label(for='locName') Location:
               input.form-control#locName(type='text', name='loc[name]', value=(user.loc.name || 'location?'))
@@ -30,14 +63,14 @@ block content
               input.form-control#tagline(type='text', name='tagline', value=(user.tagline || 'tag line?'))
           .col-xs-1
           .col-xs-4
-            .form-group
-              label(for='photo') Photo:
-              input.form-control#photo(type='text', name='photo', value=(user.photo || ''))
-
               .row
                 .col-xs-12
-                  each photo in user.photos
-                    .photo.thumbnail(style='background-image:url(#{photo});')
+                    .header2 Primary Photo
+                    #editPrimary(style='background-image: url(#{user.primaryPhoto})')
+                    .header2 Other Photos
+                    .photoDiv
+                      each photo in user.photos
+                        .profilePhotos.thumbnail(style='background-image:url(#{photo});')
           .col-xs-2
         .row
           .col-xs-5
@@ -52,16 +85,17 @@ block content
                 input(type='radio' name='visible' value='private', checked=!user.isVisible)
                 span Private
           .col-xs-5
-        .row
-        .row
-          .col-xs-6
-          .col-xs-1
             button.btn.btn-primary(type='submit') Submit
-        form#uploadPhotos(method='post', action='/users/edit', enctype='multipart/form-data')
+
+  .row
+    .col-xs-6
+    .col-xs-5
+      form#uploadPhotos(method='post', action='/users/edit/photo', enctype='multipart/form-data')
           .form-group
              label(for='photos') Photos
              input.form-control#photos(type='file', name='photos', multiple=true)
-          button.btn.btn-success(type='submit') Upload Photos        .col-xs-5
+          button.btn.btn-success(type='submit') Upload Photos
+    .col-xs-1
 
 block scripts
   script(src='/js/user/editProfile.js')

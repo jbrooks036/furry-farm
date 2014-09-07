@@ -31,18 +31,15 @@ exports.create = function(req, res){
 };
 
 exports.edit = function(req, res){
-  console.log('>>>>>> users/edit.  req= ', req);
   res.render('users/edit');
 };
 
 exports.uploadPhoto = function(req, res){
-  User.findById(req.user._id, function(err, user){
+  User.findById(req.user._id.toString(), function(err, user){
     var form = new mp.Form();
     form.parse(req, function(err, fields, files){
-console.log(err, fields, files);
-      User.uploadPhoto(files, function(){
-        console.log('>>>>>> CONTROLLER - USER UPLOADPHOTO - files: ', files);
-        res.redirect('/users/edit' + res.locals.user._id);
+      user.uploadPhoto(files, function(){
+        res.redirect('/users/edit');
       });
     });
   });
@@ -95,11 +92,9 @@ exports.lick = function(req, res){
   });
 };
 
-/*
 exports.browse = function(req, res){
   var filter = req.query || {isVisible:true};
   User.find(filter, function(err, users){
     res.render('users/browse', {users:users});
   });
 };
-*/

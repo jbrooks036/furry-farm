@@ -15,6 +15,11 @@ Object.defineProperty(User, 'collection', {
   get: function(){return global.mongodb.collection('users');}
 });
 
+User.find = function(filter, cb){
+  filter.isVisible = true;
+  User.collection.find(filter).toArray(cb);
+};
+
 User.findById = function(id, cb){
   var _id = Mongo.ObjectID(id);
   User.collection.findOne({_id:_id}, function(err, obj){
@@ -67,22 +72,40 @@ User.facebookAuthenticate = function(token, secret, facebook, cb){
 };
 
 User.prototype.uploadPhoto = function(files, cb){
-  var dir   = __dirname + '/../static/img/' + this._id,
-      exist = fs.existsSync(dir),
-      self  = this;
+  var baseDir = __dirname + '/../static',
+      relDir  = '/img/' + this._id,
+      absDir  = baseDir + relDir,
+      exist = fs.existsSync(absDir),
+      oldIndex,
+      self = this;
 
-  if(!exist){fs.mkdirSync(dir);}
+  if(!exist){fs.mkdirSync(absDir);} //check to see if directory already exists
 
-  files.photos.forEach(function(photo){
-    var ext    = path.extname(photo.path),
-        rel    = '/img/' + self._id + '/' + self.photos.length + ext,
-        abs    = dir + '/' + self.photos.length + ext;
-    console.log(ext, rel);
-    fs.renameSync(photo.path, abs);
-    self.photos.push(rel);
+  var newPhotos = files.photos.map(function(photo, index){
+    if(!photo.size){return;}
+
+    //make sure there photos.length is even in existence
+    if(self.photos.length){
+      //set the index equal to the loop index + the self.photos.length
+      oldIndex = index + (self.photos.length - 1);
+    }
+    else {
+      oldIndex = index;
+    }
+
+    var ext      = path.extname(photo.path),
+        name     = oldIndex + ext,
+        absPath  = absDir + '/' + name,
+        relPath  = relDir + '/' + name;
+
+    fs.renameSync(photo.path, absPath);
+    return relPath;
   });
 
-  User.collection.save(self, cb);
+  newPhotos = _.compact(newPhotos); //shorten the new photos
+  this.photos = this.photos.concat(newPhotos); //add other old photos array with the new!
+
+  User.collection.save(this, cb);
 };
 
 User.prototype.save = function(o, cb){
